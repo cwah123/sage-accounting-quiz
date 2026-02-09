@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sage Accounting Software Quiz</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Fonts -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    
+    /* Using Inter as fallback for Sage fonts */
+    @font-face {
+      font-family: 'Sage_Headline:Black';
+      src: local('Inter Black'), local('Inter-Black');
+      font-weight: 900;
+    }
+    
+    @font-face {
+      font-family: 'Sage_Text:Regular';
+      src: local('Inter'), local('Inter-Regular');
+      font-weight: 400;
+    }
+    
+    @font-face {
+      font-family: 'Sage_Text:Medium';
+      src: local('Inter Medium'), local('Inter-Medium');
+      font-weight: 500;
+    }
+    
+    @font-face {
+      font-family: 'Sage_Text:Bold';
+      src: local('Inter Bold'), local('Inter-Bold');
+      font-weight: 700;
+    }
+    
+    @font-face {
+      font-family: 'Sage_UI:Regular';
+      src: local('Inter'), local('Inter-Regular');
+      font-weight: 400;
+    }
+    
+    @font-face {
+      font-family: 'Sage_UI:Medium';
+      src: local('Inter Medium'), local('Inter-Medium');
+      font-weight: 500;
+    }
+    
+    @font-face {
+      font-family: 'Sage_UI:Bold';
+      src: local('Inter Bold'), local('Inter-Bold');
+      font-weight: 700;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .content-stretch {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React, ReactDOM, and Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Motion (Framer Motion) -->
+  <script src="https://unpkg.com/motion@11.11.17/dist/motion.js"></script>
+
+  <!-- Application Code -->
+  <script type="text/babel">
+    const { useState } = React;
+    const { motion, AnimatePresence } = Motion;
+    
+    // SVG Data
+    const svgPaths = {
+      p3e2fd800: "M52 60H16C14.9 60 14 59.1 14 58C14 56.9 14.9 56 16 56H52C54.2 56 56 54.2 56 52V8C56 5.8 54.2 4 52 4H8C5.8 4 4 5.8 4 8V52C4 54.2 5.8 56 8 56C9.1 56 10 56.9 10 58C10 59.1 9.1 60 8 60C3.6 60 0 56.4 0 52V8C0 3.6 3.6 0 8 0H52C56.4 0 60 3.6 60 8V52C60 56.4 56.4 60 52 60ZM48 50H12C9.8 50 8 48.2 8 46V22C8 19.8 9.8 18 12 18H20C20 12.5 24.5 8 30 8C35.5 8 40 12.5 40 18H48C50.2 18 52 19.8 52 22V26C52 27.1 51.1 28 50 28C48.9 28 48 27.1 48 26V22H12V30H24C25.1 30 26 30.9 26 32C26 33.1 25.1 34 24 34H12V46H48V34H32V36C32 37.1 31.1 38 30 38C28.9 38 28 37.1 28 36V34C28 31.8 29.8 30 32 30H48C50.2 30 52 31.8 52 34V46C52 48.2 50.2 50 48 50ZM24 18H36C36 14.7 33.3 12 30 12C26.7 12 24 14.7 24 18Z",
+      p351fd780: "M48.0758 55.4721H14.7926C13.7756 55.4721 12.9435 54.64 12.9435 53.623C12.9435 52.606 13.7756 51.774 14.7926 51.774H48.0758C50.1098 51.774 51.774 50.1098 51.774 48.0758V7.39628C51.774 5.3623 50.1098 3.69814 48.0758 3.69814H7.39628C5.3623 3.69814 3.69814 5.3623 3.69814 7.39628V48.0758C3.69814 50.1098 5.3623 51.774 7.39628 51.774C8.41327 51.774 9.24535 52.606 9.24535 53.623C9.24535 54.64 8.41327 55.4721 7.39628 55.4721C3.32833 55.4721 0 52.1438 0 48.0758V7.39628C0 3.32833 3.32833 0 7.39628 0H48.0758C52.1438 0 55.4721 3.32833 55.4721 7.39628V48.0758C55.4721 52.1438 52.1438 55.4721 48.0758 55.4721ZM42.5286 44.3777H12.9435C11.9265 44.3777 11.0944 43.5456 11.0944 42.5286C11.0944 41.5116 11.9265 40.6795 12.9435 40.6795H20.3398V20.5247C18.7681 20.5247 17.1963 20.9869 15.8095 21.819C11.4642 24.7775 12.851 30.6946 12.851 30.9719L13.7756 36.704C13.868 37.3512 13.6831 37.9984 13.1284 38.4606C12.5737 38.9229 11.9265 39.0154 11.2793 38.738C10.6322 38.4607 10.1699 37.9984 10.0774 37.2588L9.15289 31.7115C9.06044 31.5266 7.11892 23.1134 13.6831 18.7681C17.3813 16.6416 21.819 16.1794 25.7945 17.6586V14.7926H23.9455C22.9285 14.7926 22.0964 13.9605 22.0964 12.9435C22.0964 11.9265 22.9285 11.0944 23.9455 11.0944H25.7945V9.24535C25.7945 8.22836 26.6266 7.39628 27.6436 7.39628C28.6606 7.39628 29.4927 8.22836 29.4927 9.24535V11.0944H31.3417C32.3587 11.0944 33.1908 11.9265 33.1908 12.9435C33.1908 13.9605 32.3587 14.7926 31.3417 14.7926H29.4927V17.6586C33.4682 16.1794 37.9059 16.6416 41.6041 18.7681C48.1683 23.1134 46.1343 31.5266 46.0418 31.8965L45.1173 37.3512C45.0248 37.9984 44.5626 38.5531 43.9154 38.8305C43.2682 39.0154 42.6211 38.9229 42.0663 38.5531C41.5116 38.0908 41.3267 37.4437 41.4192 36.7965L42.3437 31.2493C42.4361 30.8795 43.823 24.87 39.4776 22.0039C38.0908 21.1718 36.5191 20.7096 34.9474 20.7096V40.6795H42.3437C43.3607 40.6795 44.1928 41.5116 44.1928 42.5286C44.1928 43.5456 43.5456 44.3777 42.5286 44.3777ZM24.0379 40.6795H31.4342V20.9869C30.4172 21.2643 29.4927 21.5417 28.5681 22.0039C28.3832 22.0964 28.1983 22.1888 27.921 22.1888C27.736 22.1888 27.4587 22.1888 27.2738 22.1888C27.0889 22.1888 26.9964 22.0964 26.8115 22.0039C25.887 21.5417 24.9624 21.2643 23.9455 20.9869V40.6795H24.0379Z",
+      p4497e00: "M52 60H18C16.9 60 16 59.1 16 58C16 56.9 16.9 56 18 56H52C54.2 56 56 54.2 56 52V8C56 5.8 54.2 4 52 4H8C5.8 4 4 5.8 4 8V52C4 54.2 5.8 56 8 56H10C11.1 56 12 56.9 12 58C12 59.1 11.1 60 10 60H8C3.6 60 0 56.4 0 52V8C0 3.6 3.6 0 8 0H52C56.4 0 60 3.6 60 8V52C60 56.4 56.4 60 52 60ZM46 48H36C34.9 48 34 47.1 34 46V38H26V46C26 47.1 25.1 48 24 48H14C12.9 48 12 47.1 12 46C12 44.9 12.9 44 14 44H22V36C22 34.9 22.9 34 24 34H36C37.1 34 38 34.9 38 36V44H44V27L30 16.5L16 27V38C16 39.1 15.1 40 14 40C12.9 40 12 39.1 12 38V26C12 25.4 12.3 24.8 12.8 24.4L28.8 12.4C29.5 11.9 30.5 11.9 31.2 12.4L47.2 24.4C47.7 24.8 48 25.4 48 26V46C48 47.1 47.1 48 46 48Z",
+      p15ad6580: "M52 60H46C42.7 60 40 57.3 40 54V46C40 39.4 35.5 34 30 34C24.5 34 20 39.4 20 46V48C20 49.1 19.1 50 18 50C16.9 50 16 49.1 16 48V46C16 37.2 22.3 30 30 30C32.9 30 35.5 28.5 36.9 26C38.3 23.5 38.3 20.5 36.9 18C36.3 17 35.6 16.2 34.7 15.5C31.9 13.5 28.1 13.5 25.3 15.5C24.4 16.2 23.6 17 23.1 18C22 20 21.7 22.3 22.4 24.5C22.7 25.5 22.2 26.7 21.1 27C20 27.3 18.9 26.8 18.6 25.7C17.5 22.5 17.9 18.9 19.6 16C20.4 14.5 21.6 13.3 22.9 12.3C27.1 9.2 32.8 9.2 37 12.3C38.4 13.3 39.5 14.5 40.3 16C42.9 20.5 42.3 26.2 38.8 30C38.1 30.7 37.4 31.4 36.6 31.9C41.3 35 44 40.3 43.9 45.9V53.9C43.9 55 44.8 55.9 45.9 55.9H51.9C54.1 55.9 55.9 54.1 55.9 51.9V8C55.9 5.8 54.1 4 51.9 4H8C5.8 4 4 5.8 4 8V52C4 54.2 5.8 56 8 56H36C37.1 56 38 56.9 38 58C38 59.1 37.1 60 36 60H8C3.6 60 0 56.4 0 52V8C0 3.6 3.6 0 8 0H52C56.4 0 60 3.6 60 8V52C60 56.4 56.4 60 52 60Z",
+      p29eeea00: "M52 60H16C14.9 60 14 59.1 14 58C14 56.9 14.9 56 16 56H52C54.2 56 56 54.2 56 52V8C56 5.8 54.2 4 52 4H8C5.8 4 4 5.8 4 8V52C4 54.2 5.8 56 8 56C9.1 56 10 56.9 10 58C10 59.1 9.1 60 8 60C3.6 60 0 56.4 0 52V8C0 3.6 3.6 0 8 0H52C56.4 0 60 3.6 60 8V52C60 56.4 56.4 60 52 60ZM22 44C21.5 44 21 43.8 20.6 43.4L10.6 33.4C9.8 32.6 9.8 31.4 10.6 30.6C11.4 29.8 12.6 29.8 13.4 30.6L22 39.2L46.6 14.6C47.4 13.8 48.6 13.8 49.4 14.6C50.2 15.4 50.2 16.6 49.4 17.4L23.4 43.4C23 43.8 22.5 44 22 44Z",
+      p27d4ff00: "M52 60H16C14.8667 60 14 59.1333 14 58C14 56.8667 14.8667 56 16 56H52C54.2 56 56 54.2 56 52V8C56 5.8 54.2 4 52 4H8C5.8 4 4 5.8 4 8V52C4 54.2 5.8 56 8 56C9.13333 56 10 56.8667 10 58C10 59.1333 9.13333 60 8 60C3.6 60 0 56.4 0 52V8C0 3.6 3.6 0 8 0H52C56.4 0 60 3.6 60 8V52C60 56.4 56.4 60 52 60ZM44 46C43.4667 46 42.9333 45.8 42.6 45.4L30 32.8L17.4 45.4C16.6 46.2 15.3333 46.1333 14.6 45.4C13.8 44.6 13.8 43.3333 14.6 42.6L27.2 30L14.6 17.4C13.8 16.6 13.8667 15.3333 14.6 14.6C15.4 13.8 16.6667 13.8 17.4 14.6L30 27.2L42.6 14.6C43.4 13.8 44.6667 13.8 45.4 14.6C46.1333 15.4 46.2 16.6667 45.4 17.4L32.8 30L45.4 42.6C46 43.2 46.1333 44 45.8 44.8C45.5333 45.5333 44.8 46 44 46Z",
+      p32df4600: "M3.28604 9.85738L0.000244141 13.1432L8.21473 21.3577L26.2866 3.28579L23.0008 0L8.21473 14.7861L3.28604 9.85738Z",
+      p1508e972: "M355.199 9.75089C364.892 9.75108 372.75 17.6093 372.75 27.3026V160.435C372.75 162.191 373.242 163.905 374.066 165.455C378.234 173.289 380.597 182.229 380.597 191.722C380.597 201.502 378.089 210.696 373.682 218.697C373.09 219.772 372.75 220.972 372.75 222.199C372.75 231.893 364.892 239.751 355.199 239.751C354.027 239.751 352.881 240.078 351.857 240.649C343.789 245.154 334.493 247.722 324.597 247.722C315.027 247.722 306.018 245.32 298.138 241.088C296.579 240.251 294.852 239.751 293.082 239.751H27.3017C17.6084 239.751 9.75089 231.892 9.75089 222.199V27.3026C9.75089 17.6093 17.6083 9.75108 27.3017 9.75089H355.199Z",
+      pdccb540: "M0.00107215 51.1796C0.0662861 61.2223 3.10389 71.0209 8.73079 79.3395C14.3577 87.6581 22.3219 94.1242 31.619 97.9222C40.916 101.72 51.1296 102.68 60.9716 100.681C70.8135 98.682 79.8431 93.8132 86.9215 86.6888C94 79.5644 98.8102 70.5035 100.746 60.6488C102.681 50.7941 101.655 40.587 97.7968 31.3147C93.9386 22.0424 87.4211 14.1202 79.0663 8.54727C70.7114 2.97433 60.8934 0.000211747 50.8505 1.13022e-08C44.145 -0.000141361 37.5056 1.32598 31.3147 3.90202C25.1237 6.47807 19.5034 10.2532 14.7773 15.01C10.0511 19.7668 6.31249 25.4115 3.77657 31.619C1.24065 37.8265 -0.0424701 44.4742 0.00107215 51.1796Z",
+      p1ce72a80: "M3.38096 6.77491C2.91005 6.34844 2.16155 6.34313 1.69176 6.74742L0.360818 8.06317C-0.115781 8.47334 -0.117923 9.13685 0.340693 9.5582L4.92751 13.647C5.39396 14.0753 6.14319 14.083 6.61821 13.6798C6.61821 13.6798 18.4183 2.97031 18.4386 2.9485C18.805 2.55343 18.8008 1.98086 18.4256 1.59967C18.4017 1.57545 17.1099 0.281874 17.1099 0.281874C16.649 -0.105649 15.8819 -0.0959536 15.4229 0.325579L5.87634 9.16117L3.38096 6.77491Z",
+      p11b50e60: "M6.73535 6.49316C6.54057 6.49884 6.35565 6.5801 6.21973 6.71973L1.21973 11.7197C1.07913 11.8604 1.00014 12.0511 1.00014 12.25C1.00014 12.4489 1.07913 12.6396 1.21973 12.7803L6.21973 17.7803C6.28884 17.8523 6.37161 17.9097 6.46321 17.9493C6.5548 17.9889 6.65338 18.0098 6.75316 18.0108C6.85294 18.0118 6.95192 17.9929 7.0443 17.9552C7.13668 17.9175 7.22061 17.8617 7.29117 17.7912C7.36172 17.7206 7.4175 17.6367 7.45521 17.5443C7.49293 17.4519 7.51183 17.3529 7.51082 17.2532C7.5098 17.1534 7.48889 17.0548 7.4493 16.9632C7.40972 16.8716 7.35225 16.7888 7.28027 16.7197L3.56055 13H22.25C22.3494 13.0014 22.4481 12.983 22.5403 12.946C22.6325 12.9089 22.7164 12.8539 22.7872 12.7841C22.858 12.7143 22.9142 12.6312 22.9526 12.5395C22.9909 12.4478 23.0107 12.3494 23.0107 12.25C23.0107 12.1506 22.9909 12.0522 22.9526 11.9605C22.9142 11.8688 22.858 11.7857 22.7872 11.7159C22.7164 11.6461 22.6325 11.5911 22.5403 11.554C22.4481 11.517 22.3494 11.4986 22.25 11.5H3.56055L7.28027 7.78027C7.38847 7.6749 7.46234 7.53931 7.49221 7.39126C7.52208 7.2432 7.50655 7.08958 7.44767 6.9505C7.38878 6.81141 7.28928 6.69335 7.16219 6.61175C7.03509 6.53015 6.88632 6.48882 6.73535 6.49316V6.49316Z"
+    };
+    
+    // Copilot logo placeholder
+    const copilotLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%2300d639'/%3E%3Cpath d='M30 40 L50 60 L70 40' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+
+    // Components
+    function QuizOption({ icon, label, onClick, isSelected }) {
+      const icons = {
+        person: svgPaths.p3e2fd800,
+        bag: svgPaths.p351fd780,
+        home: svgPaths.p4497e00
+      };
+
+      return (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={onClick}
+          className={`group content-stretch flex flex-col gap-[24px] items-center justify-center pb-[24px] pt-[40px] px-[24px] relative rounded-[8px] shrink-0 w-[200px] h-[200px] transition-all duration-300 ${
+            isSelected ? "bg-[#1b1b1b]" : "bg-black hover:bg-[#1b1b1b]"
+          }`}
+        >
+          <div
+            aria-hidden="true"
+            className={`absolute border-2 border-solid inset-0 pointer-events-none rounded-[8px] transition-all duration-300 ${
+              isSelected ? "border-[#00d639]" : "border-[#e2e2e2] group-hover:border-[#00d639] group-hover:border-[3px]"
+            }`}
+          />
+          <div className="overflow-visible relative shrink-0 w-[60px] h-[60px]">
+            <svg className="block w-full h-full" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d={icons[icon]} fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </div>
+          <p className={`font-['Sage_Text:Regular',sans-serif] leading-[1.6] min-w-full not-italic relative shrink-0 text-[18px] text-center w-[min-content] whitespace-pre-wrap transition-colors duration-300 ${
+            isSelected ? "text-[#00d639]" : "text-white"
+          }`}>
+            {label}
+          </p>
+        </motion.button>
+      );
+    }
+
+    function VATOption({ type, label, onClick, isSelected }) {
+      const iconPath = type === "yes" ? svgPaths.p29eeea00 : svgPaths.p27d4ff00;
+
+      return (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={onClick}
+          className={`group content-stretch flex flex-col gap-[24px] items-center justify-center pb-[24px] pt-[40px] px-[24px] relative rounded-[8px] shrink-0 w-[200px] h-[200px] transition-all duration-300 ${
+            isSelected ? "bg-[#1b1b1b]" : "bg-black hover:bg-[#1b1b1b]"
+          }`}
+        >
+          <div
+            aria-hidden="true"
+            className={`absolute border-2 border-solid inset-0 pointer-events-none rounded-[8px] transition-all duration-300 ${
+              isSelected ? "border-[#00d639]" : "border-[#e2e2e2] group-hover:border-[#00d639] group-hover:border-[3px]"
+            }`}
+          />
+          <div className="overflow-clip relative shrink-0 w-[60px] h-[60px]">
+            <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 60 60">
+              <path d={iconPath} fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </div>
+          <p className={`font-['Sage_Text:Regular',sans-serif] leading-[1.6] min-w-full not-italic relative shrink-0 text-[18px] text-center w-[min-content] whitespace-pre-wrap transition-colors duration-300 ${
+            isSelected ? "text-[#00d639]" : "text-white"
+          }`}>
+            {label}
+          </p>
+        </motion.button>
+      );
+    }
+
+    function EmployeeOption({ type, label, onClick, isSelected }) {
+      return (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={onClick}
+          className={`group content-stretch flex flex-col gap-[24px] items-center justify-center pb-[24px] pt-[40px] px-[24px] relative rounded-[8px] shrink-0 w-[200px] h-[200px] transition-all duration-300 ${
+            isSelected ? "bg-[#1b1b1b]" : "bg-black hover:bg-[#1b1b1b]"
+          }`}
+        >
+          <div
+            aria-hidden="true"
+            className={`absolute border-2 border-solid inset-0 pointer-events-none rounded-[8px] transition-all duration-300 ${
+              isSelected ? "border-[#00d639]" : "border-[#e2e2e2] group-hover:border-[#00d639] group-hover:border-[3px]"
+            }`}
+          />
+          <div className="overflow-visible relative shrink-0 w-[60px] h-[60px]">
+            <svg className="block w-full h-full" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d={svgPaths.p15ad6580} fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </div>
+          <p className={`font-['Sage_Text:Regular',sans-serif] leading-[1.6] min-w-full not-italic relative shrink-0 text-[18px] text-center w-[min-content] whitespace-pre-wrap transition-colors duration-300 ${
+            isSelected ? "text-[#00d639]" : "text-white"
+          }`}>
+            {label}
+          </p>
+        </motion.button>
+      );
+    }
+
+    function ProgressBar({ progress }) {
+      return (
+        <div className="h-[5px] relative shrink-0 w-full">
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <div className="content-stretch flex flex-col items-center justify-center px-[14px] relative w-full h-full">
+              <div className="bg-[#303030] content-stretch flex flex-[1_0_0] gap-[10px] items-center min-h-px min-w-px relative rounded-[60px] w-full">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="bg-[#00d639] h-full rounded-[60px] shrink-0"
+                />
+                <motion.div
+                  initial={{ left: "-3.5px" }}
+                  animate={{ left: `calc(${progress}% - 9.5px)` }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute w-[12px] h-[12px] top-[-3.5px]"
+                >
+                  <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
+                    <circle cx="6" cy="6" fill="#00D639" r="6" />
+                  </svg>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function ProductCard({ type }) {
+      const products = {
+        individual: {
+          category: "Sole Traders with MTD requirements",
+          title: "Sage Individual",
+          subtitle: "with Ai",
+          description: "Sort Self Assessment today and get ahead of Making Tax Digital without the stress.",
+          features: "FREE plans available",
+          button: "Discover Sage Individual"
+        },
+        accounting: {
+          category: "1-19 Employees",
+          title: "Sage Accounting",
+          subtitle: "with Ai",
+          description: "Get paid 7 days faster and save 5 hours weekly with Sage Copilot.",
+          features: "Get 90% off for 6 months then starting at £18 per month (excluding VAT).",
+          button: "Discover Sage Accounting"
+        },
+        intacct: {
+          category: "20+ Employees",
+          title: "Sage Intacct",
+          subtitle: "with Ai",
+          description: "The leader in cloud accounting and financial management software. Scalable, highly customisable, with real-time reporting to help you make data-driven business decisions.",
+          features: "Contact us to discuss pricing.",
+          button: "Discover Sage Intacct"
+        }
+      };
+
+      const product = products[type];
+
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-[#f2f5f6] relative rounded-[40px] shrink-0 w-full max-w-[440px]"
+        >
+          <div className="content-stretch flex flex-col items-start p-[40px] relative w-full">
+            <div className="content-stretch flex flex-col items-start pb-[40px] relative shrink-0 w-full">
+              <div className="content-stretch flex flex-col gap-[24px] items-start overflow-clip relative shrink-0 w-full">
+                <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                  <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+                      <p className="font-['Sage_Text:Medium',sans-serif] leading-[1.4] not-italic relative shrink-0 text-[14px] text-[rgba(0,0,0,0.65)] w-full whitespace-pre-wrap">
+                        {product.category}
+                      </p>
+                      <p className="font-['Sage_Headline:Black',sans-serif] leading-[0] not-italic relative shrink-0 text-[32px] text-[rgba(0,0,0,0.9)] w-full whitespace-pre-wrap">
+                        <span className="leading-[1.4]">
+                          {product.title}
+                          <br />
+                        </span>
+                        <span
+                          className="bg-clip-text leading-[1.4]"
+                          style={{
+                            backgroundImage: "linear-gradient(60.9117deg, rgb(19, 160, 56) 1.6956%, rgb(0, 146, 219) 6.4822%, rgb(47, 122, 230) 18.56%, rgb(143, 73, 254) 28.678%)",
+                            WebkitTextFillColor: "transparent"
+                          }}
+                        >
+                          {product.subtitle}
+                        </span>
+                      </p>
+                      <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+                        <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+                          <div className="font-['Sage_Text:Regular',sans-serif] leading-[1.6] not-italic relative shrink-0 text-[18px] text-[rgba(0,0,0,0.9)] w-full whitespace-pre-wrap">
+                            <p className="mb-[16px]">{product.description}</p>
+                            <p className="font-['Sage_Text:Bold',sans-serif]">
+                              {product.features}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-start flex flex-wrap gap-[16px] items-start relative shrink-0 w-full">
+                      <button className="bg-black content-stretch flex items-center justify-center px-[16px] py-[13px] relative rounded-[24px] shrink-0 hover:bg-[#00d639] transition-colors">
+                        <div className="flex flex-col font-['Sage_Text:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-[rgba(255,255,255,0.9)] text-center whitespace-nowrap">
+                          <p className="leading-[1.4]">{product.button}</p>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-center relative shrink-0 w-full">
+              <div className="h-[267px] overflow-clip relative shrink-0 w-[404px]">
+                <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 blur-[20px] h-[121px] w-[304px]" style={{ backgroundImage: "linear-gradient(-46.8073deg, rgb(143, 73, 254) 65.629%, rgb(17, 175, 255) 23.116%, rgb(0, 214, 57) 94.112%)" }} />
+                <div className="absolute left-[22px] top-[20px] h-[227px] w-[360px] bg-white rounded-[12px] p-[20px]">
+                  <p className="font-['Sage_UI:Bold',sans-serif] leading-[normal] not-italic text-[16px] text-black mb-[20px]">
+                    {type === 'individual' ? 'Self Assessment Tax Returns' : type === 'accounting' ? 'Sales Invoice' : 'CFO Dashboard'}
+                  </p>
+                  <div className="bg-[#f2f5f6] h-[140px] w-full rounded-[8px] p-[20px] flex items-center justify-center">
+                    <span className="text-[#00d639] font-['Sage_UI:Bold',sans-serif] text-[24px]">
+                      {type === 'individual' ? '✓ Submitted' : type === 'accounting' ? '£168.00 Paid' : 'AI Insights'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      );
+    }
+
+    // Main App Component
+    function App() {
+      const [selectedOption, setSelectedOption] = useState(null);
+      const [vatStatus, setVATStatus] = useState(null);
+      const [employeeCount, setEmployeeCount] = useState(null);
+      const [showResults, setShowResults] = useState(false);
+      const [quizStep, setQuizStep] = useState(1);
+
+      const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        
+        if (option === "sole-trader" || option === "other") {
+          setTimeout(() => {
+            setQuizStep(2);
+          }, 500);
+        } else if (option === "limited-company") {
+          setTimeout(() => {
+            setQuizStep(3);
+          }, 500);
+        }
+      };
+
+      const handleVATClick = (vat) => {
+        setVATStatus(vat);
+        setTimeout(() => {
+          setShowResults(true);
+        }, 500);
+      };
+
+      const handleEmployeeClick = (count) => {
+        setEmployeeCount(count);
+        setTimeout(() => {
+          setShowResults(true);
+        }, 500);
+      };
+
+      const handleBackClick = () => {
+        if (quizStep === 2) {
+          setQuizStep(1);
+          setVATStatus(null);
+        } else if (quizStep === 3) {
+          setQuizStep(1);
+          setEmployeeCount(null);
+        }
+      };
+
+      const getProgress = () => {
+        if (quizStep === 1 && !selectedOption) return 23;
+        if (quizStep === 1 && selectedOption) return 50;
+        if (quizStep === 2 && !vatStatus) return 66;
+        if (quizStep === 2 && vatStatus && !showResults) return 83;
+        return 100;
+      };
+
+      const getRecommendedProducts = () => {
+        switch (selectedOption) {
+          case "sole-trader":
+            return ["individual"];
+          case "limited-company":
+            return ["accounting"];
+          case "other":
+            return ["intacct"];
+          default:
+            return [];
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-black">
+          {/* Hero Section */}
+          <div className="relative shrink-0 w-full">
+            <div className="content-stretch flex flex-col items-start px-[240px] relative w-full">
+              <div className="relative shrink-0 w-full">
+                <div className="content-stretch flex flex-col items-start px-[80px] relative w-full py-[80px]">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full">
+                      <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
+                        <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+                          <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+                            <p className="font-['Sage_Headline:Black',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[50px] text-[rgba(255,255,255,0.9)] text-center w-full whitespace-pre-wrap">
+                              Easy-to-use online accounting software
+                            </p>
+                          </div>
+                          <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                            <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+                              <p className="font-['Sage_Text:Regular',sans-serif] leading-[1.6] not-italic relative shrink-0 text-[22px] text-[rgba(255,255,255,0.9)] text-center w-full whitespace-pre-wrap">
+                                Whether you are a sole trader, small business or a medium-sized business, we have your accounting needs covered. Our cloud accounting software is easy to use, secure, and customisable to your needs.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quiz Section */}
+          <div className="relative rounded-[40px] shrink-0 w-full">
+            <div className="content-stretch flex flex-col items-start pb-[49px] pt-[40px] px-[40px] relative w-full">
+              <div className="mb-[-9px] relative rounded-[40px] shrink-0 w-full">
+                <div className="content-stretch flex items-center justify-center px-[240px] relative w-full">
+                  <div className="content-stretch flex flex-col gap-[8px] items-center justify-center relative shrink-0">
+                    <div className="content-stretch flex flex-col items-center justify-center relative shrink-0 w-full">
+                      {/* Question Header */}
+                      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full mb-[24px]">
+                        <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0 w-full">
+                          <p className="font-['Sage_Text:Medium',sans-serif] leading-[1.4] not-italic relative shrink-0 text-[18px] text-[rgba(255,255,255,0.85)] text-center">
+                            Find the right Sage accounting software for your business
+                          </p>
+                          {(quizStep === 2 || quizStep === 3) && (
+                            <button
+                              onClick={handleBackClick}
+                              className="relative shrink-0 w-[24px] h-[24px] p-[4px] rounded-[8px] hover:bg-[#303030] transition-colors"
+                            >
+                              <div aria-hidden="true" className="absolute border border-[#474747] border-solid inset-0 pointer-events-none rounded-[8px]" />
+                              <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                                <path d={svgPaths.p11b50e60} fill="rgba(255,255,255,0.9)" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+                        <p className="font-['Sage_Headline:Black',sans-serif] leading-[1.4] not-italic relative shrink-0 text-[32px] text-[rgba(255,255,255,0.95)] text-center w-full whitespace-pre-wrap">
+                          {quizStep === 1 ? "How is your business structured?" : quizStep === 2 ? "Do you pay VAT?" : "How many employees do you have?"}
+                        </p>
+                      </div>
+
+                      {/* Progress Bar */}
+                      <div className="h-[24px] shrink-0 w-[766px]" />
+                      <ProgressBar progress={getProgress()} />
+                      <div className="h-[40px] shrink-0 w-[766px]" />
+
+                      {/* Options */}
+                      <AnimatePresence mode="wait">
+                        {!showResults && quizStep === 1 && (
+                          <motion.div
+                            initial={{ opacity: 1 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="content-stretch flex gap-[40px] items-center justify-center relative shrink-0 w-full"
+                          >
+                            <QuizOption
+                              icon="person"
+                              label="Sole Trader"
+                              onClick={() => handleOptionClick("sole-trader")}
+                              isSelected={selectedOption === "sole-trader"}
+                            />
+                            <QuizOption
+                              icon="bag"
+                              label="Limited Company"
+                              onClick={() => handleOptionClick("limited-company")}
+                              isSelected={selectedOption === "limited-company"}
+                            />
+                            <QuizOption
+                              icon="home"
+                              label="Other"
+                              onClick={() => handleOptionClick("other")}
+                              isSelected={selectedOption === "other"}
+                            />
+                          </motion.div>
+                        )}
+
+                        {!showResults && quizStep === 2 && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="content-stretch flex gap-[40px] items-center justify-center relative shrink-0 w-full"
+                          >
+                            <VATOption
+                              type="yes"
+                              label="Yes, I'm VAT registered"
+                              onClick={() => handleVATClick("yes")}
+                              isSelected={vatStatus === "yes"}
+                            />
+                            <VATOption
+                              type="no"
+                              label="No, I'm not VAT registered"
+                              onClick={() => handleVATClick("no")}
+                              isSelected={vatStatus === "no"}
+                            />
+                          </motion.div>
+                        )}
+
+                        {!showResults && quizStep === 3 && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="content-stretch flex gap-[40px] items-center justify-center relative shrink-0 w-full"
+                          >
+                            <EmployeeOption
+                              type="0-19"
+                              label="0-19 employees"
+                              onClick={() => handleEmployeeClick("0-19")}
+                              isSelected={employeeCount === "0-19"}
+                            />
+                            <EmployeeOption
+                              type="20+"
+                              label="20+ employees"
+                              onClick={() => handleEmployeeClick("20+")}
+                              isSelected={employeeCount === "20+"}
+                            />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <AnimatePresence>
+            {showResults && (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative w-full"
+              >
+                <div className="content-stretch flex items-center justify-center pb-[24px] px-[240px] relative shrink-0 w-full">
+                  <p className="font-['Sage_Text:Medium',sans-serif] leading-[1.4] not-italic relative shrink-0 text-[18px] text-[rgba(255,255,255,0.85)] text-center">
+                    All accounting solutions
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-[40px] items-start justify-center px-[240px] pb-[80px]">
+                  {getRecommendedProducts().map((product, index) => (
+                    <motion.div
+                      key={product}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    >
+                      <ProductCard type={product} />
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Show all products button */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  className="flex justify-center pb-[80px]"
+                >
+                  <button
+                    onClick={() => {
+                      setSelectedOption(null);
+                      setVATStatus(null);
+                      setEmployeeCount(null);
+                      setQuizStep(1);
+                      setShowResults(false);
+                    }}
+                    className="bg-[#00d639] hover:bg-[#00b82f] transition-colors content-stretch flex items-center justify-center px-[24px] py-[16px] relative rounded-[24px] shrink-0"
+                  >
+                    <div className="flex flex-col font-['Sage_Text:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-black text-center whitespace-nowrap">
+                      <p className="leading-[1.4]">Start Over</p>
+                    </div>
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    }
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
