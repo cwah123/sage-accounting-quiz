@@ -1,0 +1,33 @@
+/* Sage Headline Font - used for headings */
+@font-face {
+  font-family: 'Sage Headline';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local('Arial Black'), local('Arial-Black'), local('ArialBlack');
+}
+
+/* Sage Text Font - used for body text */
+@font-face {
+  font-family: 'Sage Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Arial'), local('Helvetica');
+}
+
+@font-face {
+  font-family: 'Sage Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Arial'), local('Helvetica');
+}
+
+@font-face {
+  font-family: 'Sage Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Arial Bold'), local('Arial-Bold'), local('Helvetica Bold');
+}
