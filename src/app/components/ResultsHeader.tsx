@@ -30,7 +30,7 @@ export function ResultsHeader({ onTakeQuizAgain }: ResultsHeaderProps) {
                                   </g>
                                 </svg>
                               </div>
-                              <div className="flex flex-col font-['Sage_Text:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.9)] text-center whitespace-nowrap">
+                              <div className="font-text flex flex-col justify-center leading-[0] not-italic relative shrink-0 text-primary-foreground text-center whitespace-nowrap" style={{ fontSize: 'var(--text-xs)', fontWeight: 'var(--font-weight-medium)' }}>
                                 <p className="leading-[1.4]">Take the quizz again</p>
                               </div>
                             </div>
@@ -43,9 +43,9 @@ export function ResultsHeader({ onTakeQuizAgain }: ResultsHeaderProps) {
                             </div>
                           </button>
                         </div>
-                        <p className="font-['Sage_Headline:Black',sans-serif] leading-[1.4] min-w-full not-italic relative shrink-0 text-[32px] text-[rgba(255,255,255,0.9)] text-center w-[min-content] whitespace-pre-wrap">
+                        <h3 className="font-headline min-w-full relative shrink-0 text-primary-foreground text-center w-[min-content] whitespace-pre-wrap" style={{ fontWeight: 'var(--font-weight-black)' }}>
                           Based on your answers, this is your recommended accounting software
-                        </p>
+                        </h3>
                         <div className="content-stretch flex flex-col h-[16px] items-start shrink-0 w-[766px]" />
                       </div>
                     </div>

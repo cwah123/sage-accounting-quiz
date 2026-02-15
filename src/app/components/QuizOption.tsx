@@ -63,7 +63,7 @@ export function QuizOption({ icon, label, onClick, isSelected }: QuizOptionProps
       transition={{ duration: 0.3, ease: "easeInOut" }}
       onClick={handleClick}
       className={`group content-stretch flex flex-col gap-[24px] items-center justify-center pb-[24px] pt-[40px] px-[24px] relative rounded-lg shrink-0 size-[200px] transition-all duration-300 ${
-        isSelected ? "bg-[#1B1B1B]" : "bg-primary hover:bg-[#1B1B1B]"
+        isSelected ? "bg-[var(--primary-hover)]" : "bg-primary hover:bg-[var(--primary-hover)]"
       }`}
     >
       <div

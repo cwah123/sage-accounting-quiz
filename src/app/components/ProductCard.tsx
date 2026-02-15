@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import svgPaths from "../../imports/svg-ygakoriasz";
-import imgCopilotLogo from "figma:asset/153b955bbde3b9be1a424e94aba682a8bf4e8034.png";
 
 interface ProductCardProps {
   type: "individual" | "accounting" | "intacct";
@@ -145,7 +144,11 @@ function SalesInvoicePreview() {
         </div>
       </div>
       <div className="absolute right-[20px] bottom-[20px] size-[80px] rounded-full bg-black flex items-center justify-center">
-        <img src={imgCopilotLogo} alt="Copilot" className="size-[50px]" />
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="8" fill="#00d639"/>
+          <path d="M25 10 L25 18 M25 32 L25 40 M10 25 L18 25 M32 25 L40 25" stroke="#00d639" strokeWidth="3" strokeLinecap="round"/>
+          <circle cx="25" cy="25" r="15" stroke="#00d639" strokeWidth="2" fill="none"/>
+        </svg>
       </div>
     </div>
   );

@@ -209,7 +209,7 @@ export default function App() {
                       </div>
                       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
                         <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-                          <p className="text-[22px] text-center w-full whitespace-pre-wrap text-foreground/90">
+                          <p style={{ fontSize: 'var(--text-hero)' }} className="text-center w-full whitespace-pre-wrap text-foreground/90">
                             Whether you are a sole trader, small business or a medium-sized business, we have your accounting needs covered. Our cloud accounting software is easy to use, secure, and customisable to your needs.
                           </p>
                         </div>
