@@ -89,7 +89,7 @@ function LogoTrustpilot5Stars() {
       <GroupCopy />
       <GroupCopy2 />
       <GroupCopy3 />
-      <p className="absolute font-['Sage_Text:Medium',sans-serif] inset-[72.22%_3.79%_11.11%_51.72%] leading-[normal] not-italic text-[10px] text-[rgba(255,255,255,0.9)]">Reviews 16,682 - Excellent**</p>
+      <p className="absolute inset-[72.22%_3.79%_11.11%_51.72%] leading-[normal] not-italic text-[10px] text-[rgba(255,255,255,0.9)]" style={{ fontFamily: 'var(--font-sage-text)', fontWeight: 'var(--font-weight-medium)' }}>Reviews 16,682 - Excellent**</p>
     </div>
   );
 }
@@ -142,7 +142,7 @@ function Frame() {
   return (
     <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[12px] items-center justify-center left-1/2 top-1/2">
       <Component30X30CrownGreenOnTransparentIcon />
-      <p className="font-['Sage_Text:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[20px] text-center text-white">HMRC recognised</p>
+      <p className="leading-[normal] not-italic relative shrink-0 text-[20px] text-center text-white" style={{ fontFamily: 'var(--font-sage-text)', fontWeight: 'var(--font-weight-medium)' }}>HMRC recognised</p>
     </div>
   );
 }
@@ -179,7 +179,7 @@ function Frame1() {
   return (
     <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[12px] items-center justify-center left-1/2 top-1/2">
       <Component30X30CheckboxGreenOnTransparentIcon />
-      <p className="font-['Sage_Text:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[20px] text-center text-white">Making Tax Digital ready</p>
+      <p className="leading-[normal] not-italic relative shrink-0 text-[20px] text-center text-white" style={{ fontFamily: 'var(--font-sage-text)', fontWeight: 'var(--font-weight-medium)' }}>Making Tax Digital ready</p>
     </div>
   );
 }
