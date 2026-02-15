@@ -12,33 +12,36 @@ interface ProductCardsProps {
 
 function SageIndividualPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full flex items-center justify-center bg-gradient-to-br from-purple-500 via-blue-500 to-green-500 rounded-[20px]" data-name="micro-ui-SMALL-accounting-GB-agnostic">
-      <div className="text-white text-center p-8">
-        <div className="text-2xl font-bold mb-2">Sage Individual</div>
-        <div className="text-sm opacity-80">Tax Management Preview</div>
-      </div>
+    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]" data-name="micro-ui-SMALL-accounting-GB-agnostic">
+      <ImageWithFallback
+        src="https://images.unsplash.com/photo-1762265591492-1454ae17f31a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXglMjBmaW5hbmNpYWwlMjBkb2N1bWVudHMlMjBjYWxjdWxhdG9yfGVufDF8fHx8MTc3MTExNjY3NXww&ixlib=rb-4.1.0&q=80&w=1080"
+        alt="Sage Individual - Tax Management"
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }
 
 function SageAccountingPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 rounded-[20px]">
-      <div className="text-white text-center p-8">
-        <div className="text-2xl font-bold mb-2">Sage Accounting</div>
-        <div className="text-sm opacity-80">Sales Invoice Preview</div>
-      </div>
+    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]">
+      <ImageWithFallback
+        src="https://images.unsplash.com/photo-1753955900083-b62ee8d97805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvdW50aW5nJTIwaW52b2ljZSUyMGxhcHRvcHxlbnwxfHx8fDE3NzExMTY2NzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        alt="Sage Accounting - Sales Invoice"
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }
 
 function SageIntacctPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-[20px]">
-      <div className="text-white text-center p-8">
-        <div className="text-2xl font-bold mb-2">Sage Intacct</div>
-        <div className="text-sm opacity-80">CFO Dashboard Preview</div>
-      </div>
+    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]">
+      <ImageWithFallback
+        src="https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGRhc2hib2FyZCUyMGFuYWx5dGljc3xlbnwxfHx8fDE3NzExMTIwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        alt="Sage Intacct - CFO Dashboard"
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 }
