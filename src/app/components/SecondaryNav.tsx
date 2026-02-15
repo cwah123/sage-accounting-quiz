@@ -22,10 +22,10 @@ export default function SecondaryNav() {
 
   return (
     <div className="bg-[#1b1b1b] w-full relative" data-name="Secondary nav">
-      <div className="flex items-center justify-between h-[60px] px-[20px] md:px-[40px] lg:px-[80px] xl:px-[240px] max-w-full mx-auto">
+      <div className="flex items-center justify-between h-[60px] px-[20px] md:px-[40px] lg:px-[80px] max-w-full mx-auto">
         {/* Title */}
         <div className="flex gap-[8px] items-center shrink-0">
-          <p className="text-[18px] text-[rgba(255,255,255,0.9)]">Accounting software</p>
+          <p className="font-text text-[rgba(255,255,255,0.9)]" style={{ fontSize: 'var(--text-lg)' }}>Accounting software</p>
         </div>
 
         {/* Desktop Navigation */}

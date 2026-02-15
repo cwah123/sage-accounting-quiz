@@ -59,18 +59,18 @@ export default function App() {
 
   // Scroll to "Take the quiz again" when results are shown
   useEffect(() => {
-    if ((vatStatus || revenueAmount) && takeQuizAgainRef.current) {
+    if (showResults && (vatStatus || revenueAmount) && takeQuizAgainRef.current) {
       setTimeout(() => {
         const element = takeQuizAgainRef.current;
         if (element) {
           const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - 60 + 10;
+          const offsetPosition = elementPosition + window.pageYOffset - 120 + 60;
           
           smoothScrollTo(offsetPosition);
         }
       }, 100);
     }
-  }, [vatStatus, revenueAmount]);
+  }, [showResults, vatStatus, revenueAmount]);
 
   const handleTakeQuizAgain = () => {
     setSelectedOption(null);
@@ -197,7 +197,7 @@ export default function App() {
       <div className="relative shrink-0 w-full">
         <div className="content-stretch flex flex-col items-start px-[40px] relative w-full py-[0px]">
           <div className="relative shrink-0 w-full">
-            <div className="content-stretch flex flex-col items-start px-[80px] relative w-full py-[40px]">
+            <div className="content-stretch flex flex-col items-start relative w-full px-[80px] pt-[40px] pb-[0px]">
               <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
                 <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
@@ -209,7 +209,7 @@ export default function App() {
                       </div>
                       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
                         <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-                          <p style={{ fontSize: 'var(--text-hero)' }} className="text-center w-full whitespace-pre-wrap text-foreground/90">
+                          <p style={{ fontSize: '18px' }} className="text-center w-full whitespace-pre-wrap text-foreground/90">
                             Whether you are a sole trader, small business or a medium-sized business, we have your accounting needs covered. Our cloud accounting software is easy to use, secure, and customisable to your needs.
                           </p>
                         </div>

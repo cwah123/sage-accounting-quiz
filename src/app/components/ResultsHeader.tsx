@@ -6,7 +6,7 @@ interface ResultsHeaderProps {
 
 export function ResultsHeader({ onTakeQuizAgain }: ResultsHeaderProps) {
   return (
-    <div className="bg-[rgba(0,0,0,0)] content-stretch flex flex-col items-start overflow-clip pt-[48px] px-[240px] relative rounded-[37.375px] w-full">
+    <div className="bg-[rgba(0,0,0,0)] content-stretch flex flex-col items-start overflow-clip relative rounded-[37.375px] w-full px-[240px] pt-[24px] pb-[0px]">
       <div className="relative rounded-[40px] shrink-0 w-full">
         <div className="content-stretch flex flex-col items-start pb-[33px] px-[40px] relative w-full">
           <div className="content-stretch flex items-end justify-end mb-[-9px] shrink-0 w-full" />

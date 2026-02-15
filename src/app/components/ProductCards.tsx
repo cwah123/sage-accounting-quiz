@@ -1,6 +1,8 @@
 import svgPaths from "../../imports/svg-a72gqe4tl8";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 import CircleGlow from "../../imports/CircleGlow";
+import imgSageIndividual from "figma:asset/037347e46f25df0defe259f35ab67d634c62753f.png";
+import imgSageAccounting from "figma:asset/482f987eaabfd377a4eb2e6f4eee90814d65de5a.png";
+import imgSageIntacct from "figma:asset/e4006daca03274461d8b40e8f4433cebbcb86816.png";
 
 type VATStatus = "yes" | "no" | null;
 type RevenueAmount = "under" | "over" | null;
@@ -10,13 +12,14 @@ interface ProductCardsProps {
   revenueAmount?: RevenueAmount;
 }
 
+// Product preview components with actual Figma asset images
 function SageIndividualPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]" data-name="micro-ui-SMALL-accounting-GB-agnostic">
-      <ImageWithFallback
-        src="https://images.unsplash.com/photo-1762265591492-1454ae17f31a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXglMjBmaW5hbmNpYWwlMjBkb2N1bWVudHMlMjBjYWxjdWxhdG9yfGVufDF8fHx8MTc3MTExNjY3NXww&ixlib=rb-4.1.0&q=80&w=1080"
-        alt="Sage Individual - Tax Management"
-        className="w-full h-full object-cover"
+    <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent" data-name="micro-ui-SMALL-accounting-GB-agnostic">
+      <img 
+        src={imgSageIndividual}
+        alt="Self Assessment Tax Returns"
+        className="relative w-full h-auto scale-[1.15]"
       />
     </div>
   );
@@ -24,11 +27,11 @@ function SageIndividualPreview() {
 
 function SageAccountingPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]">
-      <ImageWithFallback
-        src="https://images.unsplash.com/photo-1753955900083-b62ee8d97805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvdW50aW5nJTIwaW52b2ljZSUyMGxhcHRvcHxlbnwxfHx8fDE3NzExMTY2NzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
-        alt="Sage Accounting - Sales Invoice"
-        className="w-full h-full object-cover"
+    <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
+      <img 
+        src={imgSageAccounting}
+        alt="Sales Invoice"
+        className="relative w-full h-auto scale-[1.15]"
       />
     </div>
   );
@@ -36,11 +39,11 @@ function SageAccountingPreview() {
 
 function SageIntacctPreview() {
   return (
-    <div className="h-[200px] overflow-clip relative shrink-0 w-full rounded-[20px]">
-      <ImageWithFallback
-        src="https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGRhc2hib2FyZCUyMGFuYWx5dGljc3xlbnwxfHx8fDE3NzExMTIwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-        alt="Sage Intacct - CFO Dashboard"
-        className="w-full h-full object-cover"
+    <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
+      <img 
+        src={imgSageIntacct}
+        alt="CFO Dashboard"
+        className="relative w-full h-auto scale-[1.15]"
       />
     </div>
   );
