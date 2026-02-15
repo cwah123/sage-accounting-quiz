@@ -1,5 +1,4 @@
 import svgPaths from "./svg-z8av6pqeyt";
-import imgRectangle from "figma:asset/245a7d0f66b2a4c07c6f65541bd8759f79b07f71.png";
 
 function Trustpilot() {
   return (
@@ -84,9 +83,6 @@ function GroupCopy3() {
 function LogoTrustpilot5Stars() {
   return (
     <div className="absolute contents inset-0" data-name="logo-trustpilot-5-stars">
-      <div className="absolute inset-0 opacity-0" data-name="Rectangle">
-        <img alt="" className="block max-w-none size-full" height="72" src={imgRectangle} width="290" />
-      </div>
       <Trustpilot />
       <Group />
       <GroupCopy1 />
