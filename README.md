@@ -1,174 +1,153 @@
-# Sage Accounting Software Quiz
+# Sage Accounting Quiz
 
-A React-based interactive quiz application that helps users find the right Sage accounting software for their business needs. Built with a strict design system using Tailwind CSS v4 and custom CSS variables for maintainable styling.
+A React-based quiz application for Sage accounting software that helps users find the right accounting solution for their business.
 
-## Features
+## 🚀 Quick Fix for Blank Page
 
-- **Interactive Multi-Step Quiz**: Guides users through business structure, VAT status, employee count, and revenue questions
-- **Smooth Animations**: 300ms custom smooth scrolling and coordinated timing for progress bar and card highlighting
-- **Responsive Design**: Mobile-friendly with hamburger navigation menus
-- **Design System**: Strictly adheres to custom CSS variables for colors, spacing, typography, and borders
-- **Dynamic Product Recommendations**: Highlights recommended accounting software based on user responses
-- **Progress Tracking**: Visual progress bar with smooth transitions between quiz steps
+The blank page at https://cwah123.github.io/sage-accounting-quiz/ is caused by the site not being rebuilt with the correct GitHub Pages configuration. Here's how to fix it:
 
-## Tech Stack
+### Step 1: Enable GitHub Actions for Pages
 
-- **React 18.3.1**: Modern React with hooks
-- **Vite 6.3.5**: Fast build tool and development server
-- **Tailwind CSS 4.1.12**: Utility-first CSS framework
-- **Motion (Framer Motion) 12.23.24**: Smooth animations and transitions
-- **Material-UI**: Component library for enhanced UI elements
-- **TypeScript**: Type-safe development
+1. Go to your repository settings: https://github.com/cwah123/sage-accounting-quiz/settings/pages
+2. Under **"Build and deployment"** → **"Source"**, select **"GitHub Actions"** (NOT "Deploy from a branch")
 
-## Installation
+### Step 2: Create the Deployment Workflow
+
+Create a new file in your repository at `.github/workflows/deploy.yml` with this content:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Build
+        run: pnpm build
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### Step 3: Trigger the Deployment
+
+After creating the workflow file:
+- Commit and push it to the `main` branch
+- The deployment will start automatically
+- Check the "Actions" tab in your repository to see the progress
+- Once complete, your site will be live at https://cwah123.github.io/sage-accounting-quiz/
+
+## 📋 What's Been Fixed
+
+✅ **Vite Configuration**: Added `base: '/sage-accounting-quiz/'` to `vite.config.ts`  
+✅ **Design System**: All CSS variables for colors, spacing, borders, radius, and typography are in place  
+✅ **Custom Fonts**: Using Sage Headline and Sage Text fonts as defined in `/src/styles/fonts.css`  
+✅ **Entry Points**: Both `index.html` and `src/main.tsx` are properly configured  
+✅ **Package Dependencies**: All required packages are listed in `package.json`
+
+## 🎨 Design System
+
+This application uses a custom design system with:
+
+- **Colors**: Defined in `/src/styles/theme.css` using CSS variables (e.g., `--accent`, `--foreground`, `--background`)
+- **Typography**: Sage Headline (headings) and Sage Text (body) fonts from `/src/styles/fonts.css`
+- **Spacing & Borders**: Custom CSS variables for consistent spacing and border radius
+- **Dark Mode**: Built-in dark mode support with `.dark` class
+
+All UI components use these CSS variables to ensure maintainability and easy theme updates.
+
+## 🛠️ Local Development
 
 ```bash
-# Install dependencies using pnpm (recommended)
+# Install dependencies
 pnpm install
 
-# Or using npm
-npm install
-
-# Or using yarn
-yarn install
-```
-
-## Development
-
-```bash
 # Start development server
-npm run dev
-
-# Or using pnpm
 pnpm dev
-```
 
-The application will be available at `http://localhost:5173`
-
-## Build
-
-```bash
 # Build for production
-npm run build
-
-# Or using pnpm
 pnpm build
 ```
 
-## Design System
-
-This project uses a strict design system defined in custom CSS files:
-
-- `/src/styles/theme.css` - CSS variables for colors, spacing, typography, borders, and radius
-- `/src/styles/fonts.css` - Custom font face definitions (Sage Text and Sage Headline families)
-- `/src/styles/tailwind.css` - Tailwind configuration with custom utilities
-
-### Typography
-
-The project uses custom Sage font families:
-- **Sage Text** (Regular, Medium, Bold variants)
-- **Sage Headline** (Black weight)
-
-All text components use these font faces via CSS custom properties rather than standard Tailwind utility classes.
-
-### Color System
-
-Colors are defined using CSS variables in `theme.css`:
-- Background colors (`--background`, etc.)
-- Foreground colors (`--foreground`, etc.)
-- Accent colors (`--accent`, etc.)
-- Border colors (`--border`, etc.)
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-/
 ├── src/
 │   ├── app/
-│   │   ├── App.tsx                 # Main application component
-│   │   └── components/
-│   │       ├── QuizOption.tsx      # Business structure selection
-│   │       ├── VATOption.tsx       # VAT registration selection
-│   │       ├── EmployeeOption.tsx  # Employee count selection
-│   │       ├── RevenueOption.tsx   # Revenue selection
-│   │       ├── ProgressBar.tsx     # Quiz progress indicator
-│   │       ├── ProductCards.tsx    # Product display cards
-│   │       ├── ResultsHeader.tsx   # Results section header
-│   │       ├── MainNavigation.tsx  # Primary navigation
-│   │       └── SecondaryNav.tsx    # Secondary navigation
-│   ├── imports/                    # Figma-imported components and SVGs
-│   └── styles/
-│       ├── theme.css              # Design system variables
-│       ├── fonts.css              # Font face definitions
-│       ├── tailwind.css           # Tailwind configuration
-│       └── index.css              # Global styles
-├── package.json
-├── vite.config.ts
-└── tsconfig.json
+│   │   ├── App.tsx              # Main application component
+│   │   └── components/          # React components
+│   ├── styles/
+│   │   ├── fonts.css            # Font face definitions
+│   │   ├── tailwind.css         # Tailwind CSS imports
+│   │   ├── theme.css            # Design system variables
+│   │   └── index.css            # Main CSS entry point
+│   ├── imports/                 # SVG and asset imports
+│   └── main.tsx                 # React entry point
+├── index.html                   # HTML entry point
+├── vite.config.ts              # Vite configuration (GitHub Pages base path)
+└── package.json                # Dependencies and scripts
 ```
 
-## Quiz Flow
+## 🎯 Features
 
-1. **Business Structure** (Step 1)
-   - Sole Trader → VAT Question
-   - Limited Company → Employee Count Question
-   - Other → VAT Question
+- Interactive quiz flow with smooth animations
+- Progress bar tracking
+- Responsive design
+- Dark mode with black background
+- Custom smooth scrolling (300ms duration)
+- Product recommendation based on user inputs
+- Hamburger navigation for mobile
+- Stripe trust banner with Trustpilot, HMRC, MTD badges
 
-2. **VAT Registration** (Step 2 for Sole Trader/Other)
-   - Yes → Sage Accounting (highlighted)
-   - No → Sage Individual (highlighted)
+## 📝 Notes
 
-3. **Employee Count** (Step 3 for Limited Company)
-   - 0-19 employees → Revenue Question
-   - 20+ employees → Results
-
-4. **Revenue** (Step 4)
-   - Under £2 millions → Sage Accounting (highlighted)
-   - Over £2 millions → Sage Intacct (highlighted)
-
-## Key Features
-
-### Coordinated Animation Timing
-- Button nudge animation: 300ms
-- Delay before state change: 350ms
-- Progress bar animation: 500ms  
-- Total delay before results: 850ms (350ms delay + 500ms animation)
-- Progress bar reaches 100% when VAT or revenue options are selected
-
-### Product Highlighting
-- Highlighted cards move up 24px
-- Green gradient "Recommended software" badge appears
-- Green border (4px) on highlighted card
-- Dimmed background on non-highlighted cards
-- CircleGlow effect behind highlighted card
-
-### Custom Smooth Scrolling
-- 300ms duration with ease-in-out timing
-- Automatically scrolls to relevant sections
-- Smooth user experience during transitions
-
-## Contributing
-
-When modifying the UI:
-1. Use CSS variables from `theme.css` for all styling
-2. Use defined font faces from `fonts.css` for typography
-3. Maintain the strict design system adherence
-4. Test all quiz paths and animations
-
-## Recent Updates
-
-### Progress Bar Fix (Feb 14, 2026)
-- Fixed issue where progress bar wasn't reaching 100% when VAT options were selected
-- Updated `getProgress()` logic to return 100% when VAT status or revenue amount is selected
-- Ensures progress bar completes animation before results appear
-
-## License
-
-This project was built with Figma Make and follows the design specifications from the Sage accounting team.
-
-## Notes
-
-- This project uses the `figma:asset` virtual module scheme for imported images
-- SVG icons are imported from the `/src/imports` directory
-- The app features a black page background with a Stripe trust banner at the bottom
-- All styling uses CSS variables from the design system for easy maintainability
+- The app uses Motion (formerly Framer Motion) for animations
+- All CSS styling uses design system variables for easy theming
+- Typography strictly uses defined font faces (no Tailwind font utilities)
+- Built with React 18.3.1 and Vite 6.3.5
