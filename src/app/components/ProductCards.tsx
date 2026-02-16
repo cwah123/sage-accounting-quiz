@@ -1,8 +1,5 @@
 import svgPaths from "../../imports/svg-a72gqe4tl8";
 import CircleGlow from "../../imports/CircleGlow";
-import imgSageIndividual from "figma:asset/037347e46f25df0defe259f35ab67d634c62753f.png";
-import imgSageAccounting from "figma:asset/482f987eaabfd377a4eb2e6f4eee90814d65de5a.png";
-import imgSageIntacct from "figma:asset/e4006daca03274461d8b40e8f4433cebbcb86816.png";
 
 type VATStatus = "yes" | "no" | null;
 type RevenueAmount = "under" | "over" | null;
@@ -12,12 +9,13 @@ interface ProductCardsProps {
   revenueAmount?: RevenueAmount;
 }
 
-// Product preview components with actual Figma asset images
+// Product preview components
+// Using hosted images from imgbb
 function SageIndividualPreview() {
   return (
     <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent" data-name="micro-ui-SMALL-accounting-GB-agnostic">
       <img 
-        src={imgSageIndividual}
+        src="https://i.ibb.co.com/xyxxsjm/Individual.png"
         alt="Self Assessment Tax Returns"
         className="relative w-full h-auto scale-[1.15]"
       />
@@ -29,7 +27,7 @@ function SageAccountingPreview() {
   return (
     <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
       <img 
-        src={imgSageAccounting}
+        src="https://i.ibb.co.com/XZX7FH0m/accounting.png"
         alt="Sales Invoice"
         className="relative w-full h-auto scale-[1.15]"
       />
@@ -41,7 +39,7 @@ function SageIntacctPreview() {
   return (
     <div className="h-[200px] overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
       <img 
-        src={imgSageIntacct}
+        src="https://i.ibb.co.com/QFzg6bzN/intacct.png"
         alt="CFO Dashboard"
         className="relative w-full h-auto scale-[1.15]"
       />
