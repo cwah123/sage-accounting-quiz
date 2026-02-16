@@ -13,11 +13,11 @@ interface ProductCardsProps {
 // Using hosted images from imgbb
 function SageIndividualPreview() {
   return (
-    <div className="h-[200px] overflow-hidden relative shrink-0 w-full rounded-[20px] bg-transparent flex items-center justify-center" data-name="micro-ui-SMALL-accounting-GB-agnostic">
+    <div className="overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent" data-name="micro-ui-SMALL-accounting-GB-agnostic">
       <img 
         src="https://i.ibb.co.com/xyxxsjm/Individual.png"
         alt="Self Assessment Tax Returns"
-        className="relative w-full h-full object-cover scale-[1.15]"
+        className="relative w-full h-auto scale-[1.15] block"
       />
     </div>
   );
@@ -25,11 +25,11 @@ function SageIndividualPreview() {
 
 function SageAccountingPreview() {
   return (
-    <div className="h-[200px] overflow-hidden relative shrink-0 w-full rounded-[20px] bg-transparent flex items-center justify-center">
+    <div className="overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
       <img 
         src="https://i.ibb.co.com/XZX7FH0m/accounting.png"
         alt="Sales Invoice"
-        className="relative w-full h-full object-cover scale-[1.15]"
+        className="relative w-full h-auto scale-[1.15] block"
       />
     </div>
   );
@@ -37,11 +37,11 @@ function SageAccountingPreview() {
 
 function SageIntacctPreview() {
   return (
-    <div className="h-[200px] overflow-hidden relative shrink-0 w-full rounded-[20px] bg-transparent flex items-center justify-center">
+    <div className="overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
       <img 
         src="https://i.ibb.co.com/QFzg6bzN/intacct.png"
         alt="CFO Dashboard"
-        className="relative w-full h-full object-cover scale-[1.15]"
+        className="relative w-full h-auto scale-[1.15] block"
       />
     </div>
   );
