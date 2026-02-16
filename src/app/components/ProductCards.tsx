@@ -35,14 +35,24 @@ function SageAccountingPreview() {
   );
 }
 
-function SageIntacctPreview() {
+function SageIntacctPreview({ isHighlighted, isResultState }: { isHighlighted?: boolean; isResultState?: boolean }) {
   return (
     <div className="overflow-visible relative shrink-0 w-full rounded-[20px] bg-transparent">
-      <img 
-        src="https://i.ibb.co.com/QFzg6bzN/intacct.png"
-        alt="CFO Dashboard"
-        className="relative w-full h-auto scale-[1.15] block"
-      />
+      {isResultState && !isHighlighted ? (
+        <iframe 
+          src="https://jumpshare.com/embed/PaGqc3iPrbzZNehvOkRb"
+          className="relative w-full h-auto scale-[1.15] block"
+          style={{ aspectRatio: '16/9', border: 'none' }}
+          allow="autoplay; fullscreen"
+          title="CFO Dashboard Video"
+        />
+      ) : (
+        <img 
+          src="https://i.ibb.co.com/QFzg6bzN/intacct.png"
+          alt="CFO Dashboard"
+          className="relative w-full h-auto scale-[1.15] block"
+        />
+      )}
     </div>
   );
 }
@@ -419,7 +429,7 @@ export function ProductCards({ vatStatus, revenueAmount }: ProductCardsProps) {
                       </div>
                     </div>
                     <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-name="Stylebox">
-                      <SageIntacctPreview />
+                      <SageIntacctPreview isHighlighted={isIntacctHighlighted} isResultState={isResultState} />
                     </div>
                   </div>
                 </div>
